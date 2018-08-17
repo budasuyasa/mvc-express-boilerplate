@@ -1,0 +1,64 @@
+{% extends "index.njk"%}
+
+{% block content%}
+<div class="columns is-mobile">
+  <div class="column is-half is-offset-one-quarter">
+    <div class="box">
+        <span class="is-size-4 has-text-warning">Login</span>
+        
+        <br>
+        <br>
+
+        {% if flash %}
+            <article class="message is-danger">
+                <div class="message-body">
+                    {{ flash.message }}        
+                </div>
+            </article>                        
+        {% endif %}
+        
+        <form method="post" action="/admin/login">
+            
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control has-icons-left">
+                    <input class="input {% if flash.errors.username.msg %} is-danger  {% endif %}" 
+                        type="text" 
+                        name="username" 
+                        placeholder="buda@hookigroup.com" 
+                        value="{{ flash.form.username }}">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>    
+                <p class="help is-danger">{{ flash.errors.username.msg }}</p>        
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control has-icons-left">
+                    <input class="input {% if flash.errors.password.msg %} is-danger  {% endif %}"
+                         type="password" 
+                         name="password" 
+                         placeholder="*******">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </div>
+                <p class="help is-danger">{{ flash.errors.password.msg }}</p>               
+            </div>
+
+            <div class="field is-grouped">            
+                <div class="control">
+                    <button type="submit" class="button is-link">Login</button>
+                </div>
+                <div class="control">
+                    <a class="button is-text">Cancel</a>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
